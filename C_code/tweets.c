@@ -1,52 +1,44 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
-int main() {
-    int tweet_length = 280;
-    char tweet[tweet_length + 1];
+#define TWEET_LEN 280 // set length of tweet to be 280 characters long
 
+int main()
+{
+    char tweet[TWEET_LEN + 1];
+    // read in the tweet from user input
     printf("What are you tweeting today?:\n");
-    fgets(tweet, sizeof(tweet), stdin);
+    scanf("%280[^\n]", tweet); // this will read in at most TWEET_LEN characters, and stop at the first newline ('\n')
 
-    int valid_tweet = 1;
-
-    if (strlen(tweet) > tweet_length) {
-        valid_tweet = 0;
+    // check if the tweet satisfies the length condition
+    if (strlen(tweet) > TWEET_LEN) {
+        printf("Invalid tweet. (exceeds maximum character length)\n");
+        return 0;
     }
 
-    const char *valid_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,'&/ ";
-    for (int i = 0; tweet[i] != '\0'; i++) 
-    {
-        int found = 0;
-        for (int j = 0; valid_chars[j] != '\0'; j++) 
-        {
-            if (tweet[i] == valid_chars[j])  
-            {
-                found = 1;
-                break;
-            }
-        }
-        if (!found)
-        {
-            valid_tweet = 0;
-            break;
+    // check if the tweet contains invalid characters, only allow alpha-numeric, whitespaces, dots,commas, question/exclamation marks 
+    for (int i = 0; i < strlen(tweet); i++) {
+        if (!(isalpha(tweet[i]) || isdigit(tweet[i]) || isspace(tweet[i]) ||
+              tweet[i] == '.' || tweet[i] == ',' || tweet[i] == '?' || tweet[i] == '!' || tweet[i] == '\'')) {
+            printf("Invalid tweet. (contains invalid characters)\n");
+            return 0;
         }
     }
 
-
-    if (strstr(tweet, "@")) {
-        valid_tweet = 0;
+    // check if the tweet contains @ mentions (assuming that these start with '@' followed by any combination of letters/numbers/underscores)
+    if (strstr(tweet, "@") != NULL) {
+        printf("Invalid tweet. (contains @mentions)\n");
+        return 0;
     }
 
-    if (strstr(tweet, "http://") || strstr(tweet, "https://")) {
-        valid_tweet = 0;
+    // check if the tweet contains URLs (assuming that URLs start with "http://" or "https://")
+    if (strstr(tweet, "http://") != NULL || strstr(tweet, "https://") != NULL) {
+        printf("Invalid tweet. (contains URLs)\n");
+        return 0;
     }
 
-if (valid_tweet == 0) {
-    printf("Invalid tweet!\n");
-} else {
-    printf("Valid tweet!\n");
-    }
-
+    printf("Valid tweet.\n");
     return 0;
 }
