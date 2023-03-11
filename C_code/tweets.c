@@ -42,7 +42,10 @@ int main(void)
         }
     }
 
-    // check if the tweet contains @ mentions (assuming that these start with '@' followed by any combination of letters/numbers/underscores)
+    /** check if the tweet contains @ mentions 
+     * (assuming that these start with '@' 
+     * followed by any combination of letters/numbers/underscores)
+    */
     if (strstr(tweet, "@") != NULL) 
     {
         printf("Invalid tweet. (contains @mentions)\n");
