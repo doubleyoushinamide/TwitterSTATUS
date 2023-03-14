@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitter Lookalike</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            margin: 50px auto;
+            width: 500px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 1px solid gray;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+        .validation-output {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .valid {
+            color: green;
+            font-weight: bold;
+        }
+
+        .invalid {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tweet Validator</h1>
+        <input type="text" id="input-tweet" placeholder="What are you tweeting today?">
+        <button onclick="validateTweet()">Tweet</button>
+        <div class="validation-output"></div>
+    </div>
+
+    <script>
+        function validateTweet() {
+            var tweet = document.getElementById("input-tweet").value;
+
+            if (tweet.length > 280) {
+                showValidationResult(false, "Invalid tweet. (exceeds maximum character length)");
+                return;
+            }
+
+            for (var i = 0; i < tweet.length; i++) {
+                if (!(isAlphaNumeric(tweet[i]) || isPunctuation(tweet[i]) || isspace(tweet[i]))) {
+                    showValidationResult(false, "Invalid tweet. (contains invalid characters)");
+                    return;
+                }
+            }
+
+            if (tweet.indexOf("@") >= 0) {
+                showValidationResult(false, "Invalid tweet. (contains @mentions)");
+                return;
+            }
+
+            if (tweet.indexOf("http://") >= 0 || tweet.indexOf("https://") >= 0) {
+                showValidationResult(false, "Invalid tweet. (contains URLs)");
+                return;
+            }
+
+            showValidationResult(true, "Valid tweet.");
+        }
+
+        function showValidationResult(isValid, message) {
+            var validationOutput = document.querySelector(".validation-output");
+            validationOutput.innerHTML = message;
+            validationOutput.className = "validation-output";
+            if (isValid) {
+                validationOutput.classList.add("valid");
+            } else {
+                validationOutput.classList.add("invalid");
+            }
+            validationOutput.style.display = "block";
+        }
+
+        function isAlphaNumeric(charCode) {
+            return (charCode >= 65 && charCode <= 90) || // A-Z
+                   (charCode >= 97 && charCode <= 122) || // a-z
+                   (charCode >= 48 && charCode <= 57); // 0-9
+        }
+
+        function isPunctuation(charCode) {
+            return charCode == '.' || 
+                   charCode == ',' || 
+                   charCode == '?' || 
+                   charCode == '!' || 
+                   charCode == '\'';
+        }
+    </script>
+</body>
+</html>

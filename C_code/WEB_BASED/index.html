@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter GUI</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="tweet-form">
+        <h2>Compose Tweet</h2>
+        <textarea
+          id="tweet-input"
+          cols="30"
+          rows="5"
+          placeholder="What's happening?"
+        ></textarea>
+        <p id="char-counter">280 Characters Remaining</p>
+        <button id="post-btn" type="submit">Tweet</button>
+      </form>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
