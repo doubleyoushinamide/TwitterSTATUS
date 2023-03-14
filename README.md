@@ -1,6 +1,6 @@
 # TwitterSTATUS
 This program checks for some special standards in a tweet post
-Written both in ``` Python ``` and ```C language```
+Written in ``` Python ```,  ``` Web mode ``` and ```C language```
 
 <ins> **PROCEDURE** </ins> <br>
 * pseudocode in ``` pythonic english``` LOL! :stuck_out_tongue_closed_eyes:
@@ -9,5 +9,6 @@ Written both in ``` Python ``` and ```C language```
 * then translated line by line into C
 
 <ins> **General conditions** </ins> <br>
-lenght of text ``` strlen = 280```
-text must not contain characters outside the ASCII
+* lenght of text ``` strlen = 280```
+* text must not contain characters outside the ASCII
+* Does not accept the use of @ symbols nor URL
