@@ -20,7 +20,7 @@ def check_tweet():
         return
 
     # check if tweet contains invalid characters
-    invalid_chars = "!@#$%^&*()_-+=[]{}|;':\"<>,.?/~`"
+    invalid_chars = "@#$%^&*()_-+=[]{}|;'\"<>~`"
     for char in tweet:
         if char in invalid_chars:
             messagebox.showerror("Error", "Invalid tweet. (contains invalid characters)")

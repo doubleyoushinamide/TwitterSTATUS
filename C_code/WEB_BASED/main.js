@@ -14,7 +14,7 @@ tweetForm.addEventListener("submit", (e) => {
   }
 
   // Check invalid characters
-  const invalidChars = /[*|\":<>[\]{}`\()';@&$]/;
+  const invalidChars = /[*|\"<>[\]{}\();@&$]/;
   if (invalidChars.test(tweetText)) {
     alert("Invalid tweet. (contains invalid characters)");
     return;
